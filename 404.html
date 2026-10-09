@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sidan hittades inte | Nina Bentmosse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#05091A;--bg2:#080D21;
+  --blue:#2563EB;--blue2:#3B82F6;--blue3:#60A5FA;
+  --blue-pale:rgba(37,99,235,0.12);--blue-glow:rgba(37,99,235,0.35);
+  --white:#FFFFFF;--grey:#94A3B8;--grey2:#64748B;
+  --border:rgba(255,255,255,0.07);--border2:rgba(37,99,235,0.2);
+  --mono:'JetBrains Mono',monospace;--display:'Syne',sans-serif;--body:'Inter',sans-serif;
+}
+html{background:var(--bg)}
+body{font-family:var(--body);background:var(--bg);color:var(--white);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem clamp(1.5rem,5vw,4rem);line-height:1.6;overflow-x:hidden}
+.bg{position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:80px 80px}
+.glow{position:fixed;top:-20%;right:-10%;width:70vw;height:70vw;max-width:900px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.15) 0%,transparent 65%);pointer-events:none}
+.box{position:relative;z-index:1;max-width:620px;text-align:center}
+.label{font-family:var(--mono);font-size:.72rem;color:var(--blue3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem}
+.code{font-family:var(--display);font-size:clamp(4.5rem,14vw,8rem);font-weight:800;letter-spacing:-0.05em;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,0.25);margin-bottom:1rem}
+h1{font-family:var(--display);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-0.04em;line-height:1.1;margin-bottom:1rem}
+h1 .blue{color:var(--blue3)}
+p{font-size:.93rem;color:var(--grey);line-height:1.85;margin-bottom:2.25rem}
+.actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue);color:var(--white);padding:.8rem 1.8rem;border-radius:8px;font-weight:600;font-size:.88rem;text-decoration:none;transition:background .2s,box-shadow .2s}
+.btn-primary:hover{background:var(--blue2);box-shadow:0 0 40px var(--blue-glow)}
+.btn-ghost{font-size:.85rem;font-weight:500;color:var(--grey);text-decoration:none;display:flex;align-items:center;gap:.4rem;transition:color .2s}
+.btn-ghost:hover{color:var(--white)}
+.links{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;border-top:1px solid var(--border);padding-top:2rem}
+.links a{font-family:var(--mono);font-size:.75rem;color:var(--grey);text-decoration:none;border:1px solid var(--border);border-radius:100px;padding:.4rem 1rem;transition:all .2s;display:inline-block}
+.links a:hover{border-color:var(--blue2);color:var(--blue3);background:var(--blue-pale)}
+a:focus-visible{outline:2px solid var(--blue3);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<div class="glow" aria-hidden="true"></div>
+<main class="box">
+  <div class="label">Fel 404</div>
+  <div class="code" aria-hidden="true">404</div>
+  <h1>Sidan finns <span class="blue">inte</span></h1>
+  <p>Adressen kan vara felstavad eller flyttad. Gå tillbaka till startsidan eller hör av dig så hjälper jag dig vidare.</p>
+  <div class="actions">
+    <a href="/" class="btn-primary">Till startsidan</a>
+    <a href="/#kontakt" class="btn-ghost">Kontakta mig ↗</a>
+  </div>
+  <ul class="links">
+    <li><a href="/#om">Min resa</a></li>
+    <li><a href="/#faq">Vanliga frågor</a></li>
+    <li><a href="mailto:nina.bentmosse@bitchonconsulting.com">E-post</a></li>
+  </ul>
+</main>
+</body>
+</html>
