@@ -10,6 +10,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
+/* MÖRKT TEMA (standard) */
 :root{
   --bg:#05091A;
   --bg2:#080D21;
@@ -22,17 +23,46 @@
   --blue-glow:rgba(37,99,235,0.22);
   --white:#FFFFFF;
   --off-white:#E2E8F0;
+  --on-blue:#FFFFFF;
   --grey:#94A3B8;
   --grey2:#64748B;
   --border:rgba(255,255,255,0.07);
   --border2:rgba(37,99,235,0.2);
+  --grid:rgba(255,255,255,0.025);
+  --stroke:rgba(255,255,255,0.25);
+  --nav-bg:rgba(5,9,26,0.9);
+  --ticker-bg:rgba(8,13,33,0.6);
   --mono:'JetBrains Mono',monospace;
   --display:'Syne',sans-serif;
   --body:'Inter',sans-serif;
 }
 
+/* LJUST TEMA */
+[data-theme="light"]{
+  --bg:#F7F8FC;
+  --bg2:#FFFFFF;
+  --bg3:#EEF2FB;
+  --bg4:#E6ECF8;
+  --blue:#2563EB;
+  --blue2:#3B82F6;
+  --blue3:#1D4ED8;
+  --blue-pale:rgba(37,99,235,0.08);
+  --blue-glow:rgba(37,99,235,0.15);
+  --white:#0F172A;
+  --off-white:#1E293B;
+  --on-blue:#FFFFFF;
+  --grey:#475569;
+  --grey2:#64748B;
+  --border:rgba(15,23,42,0.1);
+  --border2:rgba(37,99,235,0.3);
+  --grid:rgba(15,23,42,0.04);
+  --stroke:rgba(15,23,42,0.35);
+  --nav-bg:rgba(247,248,252,0.92);
+  --ticker-bg:rgba(255,255,255,0.7);
+}
+
 html{scroll-behavior:smooth;background:var(--bg)}
-body{font-family:var(--body);background:var(--bg);color:var(--white);line-height:1.6;min-height:100%;overflow-x:hidden}
+body{font-family:var(--body);background:var(--bg);color:var(--white);line-height:1.6;min-height:100%;overflow-x:hidden;transition:background 0.3s,color 0.3s}
 
 /* LANGUAGE */
 [data-sv],[data-en]{display:none}
@@ -53,20 +83,22 @@ a:focus-visible,button:focus-visible{
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,4rem);transition:background 0.3s,border-color 0.3s;border-bottom:1px solid transparent}
-nav.scrolled{background:rgba(5,9,26,0.9);backdrop-filter:blur(20px);border-color:var(--border)}
+nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);border-color:var(--border)}
 .nav-logo{font-family:var(--display);font-weight:800;font-size:1.5rem;letter-spacing:-0.03em;color:var(--white)}
 .nav-logo span{color:var(--blue2)}
 .nav-right{display:flex;align-items:center;gap:1.2rem}
-.lang-toggle{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:rgba(255,255,255,0.04)}
+.theme-toggle{width:34px;height:34px;border-radius:6px;border:1px solid var(--border);background:var(--blue-pale);color:var(--white);cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.theme-toggle:hover{border-color:var(--blue2)}
+.lang-toggle{display:flex;border:1px solid var(--border);border-radius:6px;overflow:hidden;background:var(--blue-pale)}
 .lang-btn{padding:.3rem .65rem;font-size:.72rem;font-weight:600;cursor:pointer;border:none;background:none;color:var(--grey);font-family:var(--mono);transition:all 0.2s}
-.lang-btn.active{background:var(--blue);color:var(--white)}
+.lang-btn.active{background:var(--blue);color:var(--on-blue)}
 .nav-cta{font-size:.8rem;font-weight:600;color:var(--white);text-decoration:none;border:1px solid var(--border2);padding:.45rem 1.1rem;border-radius:6px;transition:all 0.2s;background:var(--blue-pale)}
-.nav-cta:hover{background:var(--blue);border-color:var(--blue)}
+.nav-cta:hover{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
 
 /* HERO */
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(1.5rem,5vw,4rem) 6rem;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;pointer-events:none}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:80px 80px}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:80px 80px}
 .hero-glow-1{position:absolute;top:-20%;right:-10%;width:70vw;height:70vw;max-width:900px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,0.15) 0%,transparent 65%)}
 .hero-glow-2{position:absolute;bottom:-30%;left:-10%;width:50vw;height:50vw;max-width:700px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.08) 0%,transparent 65%)}
 .hero-noise{position:absolute;inset:0;opacity:0.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -77,7 +109,7 @@ nav.scrolled{background:rgba(5,9,26,0.9);backdrop-filter:blur(20px);border-color
 .hero-h1 .line span{display:block;animation:slideUp 0.9s cubic-bezier(0.16,1,0.3,1) both}
 .hero-h1 .line:nth-child(2) span{animation-delay:0.12s}
 .hero-h1 .line:nth-child(3) span{animation-delay:0.24s}
-.hero-h1 .accent{color:transparent;-webkit-text-stroke:1px rgba(255,255,255,0.25)}
+.hero-h1 .accent{color:transparent;-webkit-text-stroke:1px var(--stroke)}
 .hero-h1 .blue{color:var(--blue3)}
 @keyframes slideUp{from{transform:translateY(105%);opacity:0}to{transform:translateY(0);opacity:1}}
 
@@ -86,12 +118,12 @@ nav.scrolled{background:rgba(5,9,26,0.9);backdrop-filter:blur(20px);border-color
 .hero-sub strong{color:var(--off-white)}
 .hero-cta-row{display:flex;align-items:center;gap:1rem;animation:fadeIn 1s 0.7s both}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue);color:var(--white);padding:.8rem 1.8rem;border-radius:8px;font-weight:600;font-size:.88rem;text-decoration:none;transition:all 0.2s}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue);color:var(--on-blue);padding:.8rem 1.8rem;border-radius:8px;font-weight:600;font-size:.88rem;text-decoration:none;transition:all 0.2s}
 .btn-primary:hover{background:var(--blue2);box-shadow:0 0 40px rgba(37,99,235,0.4)}
 .scroll-hint{font-family:var(--mono);font-size:.68rem;color:var(--grey2);animation:fadeIn 1.2s 1s both;writing-mode:vertical-rl;position:absolute;right:clamp(1.5rem,5vw,4rem);bottom:6rem;letter-spacing:.1em}
 
 /* TICKER */
-.ticker{padding:.8rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:rgba(8,13,33,0.6)}
+.ticker{padding:.8rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:var(--ticker-bg)}
 .ticker-track{display:flex;width:max-content;gap:0;animation:scroll 30s linear infinite}
 .ticker-item{display:flex;align-items:center;padding:0 2.5rem;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--grey2);white-space:nowrap;border-radius:6px;transition:color 0.2s,background 0.2s}
 .ticker-item:hover{color:var(--white);background:rgba(37,99,235,0.15);box-shadow:0 0 20px rgba(37,99,235,0.2)}
@@ -113,241 +145,4 @@ nav.scrolled{background:rgba(5,9,26,0.9);backdrop-filter:blur(20px);border-color
 .feat:hover{background:var(--bg3);box-shadow:0 0 40px rgba(80,120,255,0.12)}
 .feat:hover::before{opacity:1}
 .feat-num{font-family:var(--mono);font-size:.7rem;color:var(--blue3);margin-bottom:1.2rem;display:block}
-.feat-title{font-family:var(--display);font-size:1.05rem;font-weight:700;margin-bottom:.6rem;color:var(--white)}
-.feat-desc{font-size:.83rem;color:var(--grey);line-height:1.75}
-.feat-arrow{position:absolute;top:2rem;right:2rem;color:var(--border2);font-size:1rem;transition:color 0.2s,transform 0.2s}
-.feat:hover .feat-arrow{color:var(--blue3);transform:translate(3px,-3px)}
-
-/* QUALIFICATIONS — timeline */
-.qual-list{display:flex;flex-direction:column;gap:0;border-left:1px solid var(--border2);padding-left:2rem;margin-left:1rem}
-.qual-item{position:relative;padding:1.8rem 0 1.8rem 1.5rem;border-bottom:1px solid var(--border)}
-.qual-item:last-child{border-bottom:none}
-.qual-item::before{content:'';position:absolute;left:-2.5rem;top:2.3rem;width:10px;height:10px;border-radius:50%;border:2px solid var(--blue2);background:var(--bg)}
-.qual-item:first-child::before{background:var(--blue2)}
-.qual-badge{font-family:var(--mono);font-size:.68rem;color:var(--blue3);margin-bottom:.5rem;display:block;letter-spacing:.06em}
-.qual-name{font-family:var(--display);font-size:1rem;font-weight:700;margin-bottom:.35rem}
-.qual-desc{font-size:.83rem;color:var(--grey)}
-
-/* FOOTER */
-footer{padding:2.5rem clamp(1.5rem,5vw,4rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.2rem;background:var(--bg2);border-top:1px solid var(--border)}
-.footer-left{display:flex;flex-direction:column;gap:.3rem}
-.footer-name{font-family:var(--display);font-weight:800;font-size:.9rem}
-.footer-sub{font-size:.75rem;color:var(--grey2)}
-.footer-links{display:flex;gap:.6rem}
-.footer-link{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--grey);font-size:.78rem;text-decoration:none;transition:all 0.2s}
-.footer-link:hover{border-color:var(--blue2);color:var(--blue3);background:var(--blue-pale)}
-
-/* REVEAL ANIMATION */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease}
-.reveal.up{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
-
-/* Screen-reader only */
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-</style>
-</head>
-<body class="sv">
-
-<nav id="nav">
-  <div class="nav-logo">Nina Bentmosse <span> </span></div>
-  <div class="nav-right">
-    <div class="lang-toggle" role="group" aria-label="Language selection">
-      <button class="lang-btn active" id="btn-sv" onclick="setLang('sv')" aria-pressed="true">SV</button>
-      <button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-pressed="false">EN</button>
-    </div>
-    <a href="mailto:nina@ninaspace.dev" class="nav-cta"><span data-sv>Kontakt</span><span data-en>Contact</span></a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg" aria-hidden="true">
-    <div class="hero-grid"></div>
-    <div class="hero-glow-1"></div>
-    <div class="hero-glow-2"></div>
-    <div class="hero-noise"></div>
-  </div>
-  <div class="hero-inner">
-    <h1 class="hero-h1">
-      <div class="line"><span data-sv><span class="accent">IT-drift</span></span><span data-en><span class="accent">IT operations</span></span></div>
-      <div class="line"><span data-sv>med <span class="blue">struktur</span></span><span data-en>with <span class="blue">structure</span></span></div>
-      <div class="line"><span data-sv>och tydlighet</span><span data-en>and clarity</span></div>
-    </h1>
-    <div class="hero-bottom">
-      <p class="hero-sub">
-        <span data-sv>Jag är studerande IT-infrastrukturspecialist på Chas Academy och söker LIA inom IT-drift. Jag har en examen i informatik och över åtta års erfarenhet av att möta användare, följa rutiner och lösa problem i offentlig verksamhet.</span>
-        <span data-en>I am an IT infrastructure student at Chas Academy and I am looking for a workplace placement (LIA) in IT operations. I hold a degree in informatics and have over eight years of experience meeting users, following procedures and solving problems in the public sector.</span>
-      </p>
-      <div class="hero-cta-row">
-        <a href="mailto:nina@ninaspace.dev" class="btn-primary"><span data-sv>Kontakta mig</span><span data-en>Get in touch</span> ↗</a>
-      </div>
-    </div>
-  </div>
-  <div class="scroll-hint" aria-hidden="true">scroll</div>
-</section>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-track" aria-hidden="true">
-    <span class="ticker-item"><span class="ticker-dot"></span>Windows Server</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Linux</span>
-    <span class="ticker-item"><span class="ticker-dot"></span><span data-sv>Nätverk</span><span data-en>Networking</span></span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Azure</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Automation</span>
-    <span class="ticker-item"><span class="ticker-dot"></span><span data-sv>Säkerhet</span><span data-en>Security</span></span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Windows Server</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Linux</span>
-    <span class="ticker-item"><span class="ticker-dot"></span><span data-sv>Nätverk</span><span data-en>Networking</span></span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Azure</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Automation</span>
-    <span class="ticker-item"><span class="ticker-dot"></span><span data-sv>Säkerhet</span><span data-en>Security</span></span>
-  </div>
-  <p class="sr-only"><span data-sv>Nyckelord: Windows Server, Linux, nätverk, Azure, automation, säkerhet.</span><span data-en>Keywords: Windows Server, Linux, networking, Azure, automation, security.</span></p>
-</div>
-
-<!-- WHAT I OFFER -->
-<section class="s reveal">
-  <div class="s-inner">
-    <div class="s-tag"><span data-sv>Vad jag kan erbjuda</span><span data-en>What I can offer</span></div>
-    <h2 class="s-title"><span data-sv>Sex områden jag vill bidra inom</span><span data-en>Six areas I want to contribute to</span></h2>
-    <p class="s-sub"><span data-sv>Jag kombinerar tekniska studier med erfarenhet av att arbeta nära användare, dokumentera och följa rutiner.</span><span data-en>I combine technical studies with experience of working closely with users, documenting work and following procedures.</span></p>
-    <div class="features">
-      <div class="feat">
-        <span class="feat-num">01</span>
-        <div class="feat-title"><span data-sv>Drift av servrar</span><span data-en>Server operations</span></div>
-        <p class="feat-desc"><span data-sv>Arbete med Windows och Linux, systemtjänster och användarkonton i en teknisk miljö.</span><span data-en>Working with Windows and Linux, system services and user accounts in a technical environment.</span></p>
-        <span class="feat-arrow" aria-hidden="true">↗</span>
-      </div>
-      <div class="feat">
-        <span class="feat-num">02</span>
-        <div class="feat-title"><span data-sv>Nätverk och säkerhet</span><span data-en>Networking and security</span></div>
-        <p class="feat-desc"><span data-sv>Grundläggande nätverk och informationssäkerhet, med cybersäkerhetsutbildning från Cisco.</span><span data-en>Core networking and information security, with cybersecurity training from Cisco.</span></p>
-        <span class="feat-arrow" aria-hidden="true">↗</span>
-      </div>
-      <div class="feat">
-        <span class="feat-num">03</span>
-        <div class="feat">
-  <span class="feat-num">03</span>
-  <div class="feat-title"><span data-sv>Automation och skript</span><span data-en>Automation and scripting</span></div>
-  <p class="feat-desc"><span data-sv>Programmering i Python och JavaScript, samt HTML och CSS. Applikationsutveckling och testning.</span><span data-en>Programming in Python and JavaScript, plus HTML and CSS. Application development and testing.</span></p>
-  <span class="feat-arrow" aria-hidden="true">↗</span>
-</div>
-      <div class="feat">
-        <span class="feat-num">04</span>
-        <div class="feat-title"><span data-sv>Moln och virtualisering</span><span data-en>Cloud and virtualisation</span></div>
-        <p class="feat-desc"><span data-sv>Förståelse för Azure, AWS och OpenStack, samt virtualisering och containers.</span><span data-en>Understanding of Azure, AWS and OpenStack, plus virtualisation and containers.</span></p>
-        <span class="feat-arrow" aria-hidden="true">↗</span>
-      </div>
-      <div class="feat">
-        <span class="feat-num">05</span>
-        <div class="feat-title"><span data-sv>Dokumentation</span><span data-en>Documentation</span></div>
-        <p class="feat-desc"><span data-sv>Tydliga beskrivningar av installationer och rutiner, så att andra kan följa och återskapa arbetet.</span><span data-en>Clear descriptions of installations and procedures, so others can follow and reproduce the work.</span></p>
-        <span class="feat-arrow" aria-hidden="true">↗</span>
-      </div>
-      <div class="feat">
-        <span class="feat-num">06</span>
-        <div class="feat">
-  <span class="feat-num">06</span>
-  <div class="feat-title"><span data-sv>Agilt arbetssätt</span><span data-en>Agile way of working</span></div>
-  <p class="feat-desc"><span data-sv>Erfarenhet av agila principer i projekt och teamarbete.</span><span data-en>Experience of agile principles in projects and teamwork.</span></p>
-  <span class="feat-arrow" aria-hidden="true">↗</span>
-</div>
-    </div>
-  </div>
-</section>
-
-<!-- QUALIFICATIONS -->
-<section class="s reveal">
-  <div class="s-inner">
-    <div class="s-tag"><span data-sv>Utbildning</span><span data-en>Education</span></div>
-    <h2 class="s-title"><span data-sv>Utbildning &amp; certifikat</span><span data-en>Education &amp; certifications</span></h2>
-    <div class="qual-list">
-      <div class="qual-item">
-        <span class="qual-badge">2026–2028 · Chas Academy</span>
-        <div class="qual-name"><span data-sv>Infrastrukturspecialist (pågående)</span><span data-en>Infrastructure Specialist (ongoing)</span></div>
-        <p class="qual-desc"><span data-sv>Yrkeshögskoleutbildning inom säker molndrift, IT-infrastruktur och automatisering: Linux, Windows, nätverk, virtualisering, Azure, AWS och OpenStack.</span><span data-en>Vocational higher education in secure cloud operations, IT infrastructure and automation: Linux, Windows, networking, virtualisation, Azure, AWS and OpenStack.</span></p>
-      </div>
-      <div class="qual-item">
-        <span class="qual-badge">2024–2026 · Högskolan Dalarna</span>
-        <div class="qual-name"><span data-sv>Examen i Digitala tjänster / Informatik</span><span data-en>Degree in Digital Services / Informatics</span></div>
-        <p class="qual-desc"><span data-sv>Examen med fokus på digitala system och tjänster.</span><span data-en>Degree focusing on digital systems and services.</span></p>
-      </div>
-      <div class="qual-item">
-        <span class="qual-badge">2026 · Cisco Networking Academy</span>
-        <div class="qual-name">Cybersecurity Essentials</div>
-        <p class="qual-desc"><span data-sv>Grundläggande cybersäkerhet.</span><span data-en>Fundamentals of cybersecurity.</span></p>
-      </div>
-      <div class="qual-item">
-        <span class="qual-badge">2019–2023 · Göteborgs universitet</span>
-        <div class="qual-name"><span data-sv>Lärarexamen (VAL)</span><span data-en>Teaching degree (VAL)</span></div>
-        <p class="qual-desc"><span data-sv>Pedagogisk examen med inriktning mot språk och kartläggning.</span><span data-en>Teaching degree focusing on language and educational assessment.</span></p>
-      </div>
-      <div class="qual-item">
-        <span class="qual-badge">2018–2021 · Göteborgs universitet</span>
-        <div class="qual-name"><span data-sv>Globala studier och socialantropologi</span><span data-en>Global Studies and Social Anthropology</span></div>
-        <p class="qual-desc"><span data-sv>Studier av kultur, samhälle och mänskliga beteenden ur ett antropologiskt perspektiv.</span><span data-en>Study of culture, society and human behaviour from an anthropological perspective.</span></p>
-      </div>
-      <div class="qual-item">
-        <span class="qual-badge">2019–2020 · ABF Yrkeshögskola</span>
-        <div class="qual-name"><span data-sv>IKT-certifikat och studiehandledare på modersmål</span><span data-en>IKT certificate and mother-tongue study guide</span></div>
-        <p class="qual-desc"><span data-sv>Fördjupad digital kompetens inom lärandemiljöer.</span><span data-en>Advanced digital competence within learning environments.</span></p>
-      </div>
-    </div>
-
-    <div class="s-tag" style="margin-top:5rem"><span data-sv>Erfarenhet</span><span data-en>Experience</span></div>
-    <h2 class="s-title"><span data-sv>Arbetslivserfarenhet</span><span data-en>Work experience</span></h2>
-    <p class="s-sub"><span data-sv>Erfarenhet från offentlig verksamhet, där digitala system, rutiner och dokumentation används varje dag.</span><span data-en>Experience from public administration, where digital systems, procedures and documentation are used every day.</span></p>
-    <div class="qual-list">
-      <div class="qual-item">
-        <span class="qual-badge">2026– · Göteborgs Stad</span>
-        <div class="qual-name"><span data-sv>Samhällsvägledare, Invånarguide</span><span data-en>Civic guide, Resident guide</span></div>
-        <p class="qual-desc"><span data-sv>Vägleder invånare via telefon, digitala kanaler och personliga möten. Dokumenterar och följer upp ärenden i digitala system och samverkar med Arbetsförmedlingen, socialtjänsten och andra myndigheter.</span><span data-en>Guide residents by phone, digital channels and in person. Document and follow up cases in digital systems, and work with the Employment Agency, social services and other authorities.</span></p>
-      </div>
-      <div class="qual-item">
-        <span class="qual-badge">2017–2024 · Göteborgs Stad</span>
-        <div class="qual-name"><span data-sv>Språklärare och pedagogisk kartläggare</span><span data-en>Language teacher and educational assessor</span></div>
-        <p class="qual-desc"><span data-sv>Kartlade elevers behov med strukturerad dokumentation och använde digitala lärplattformar och administrativa system. Deltog i att ta fram nya rutiner och informationsmaterial, med fokus på rättssäkerhet och sekretess.</span><span data-en>Assessed students' needs with structured documentation and used digital learning platforms and administrative systems. Helped develop new procedures and information material, with a focus on legal certainty and confidentiality.</span></p>
-      </div>
-      <div class="qual-item">
-        <span class="qual-badge">2020–pågående · Kvinnojour Lex Femme</span>
-        <div class="qual-name"><span data-sv>Ledamot och utbildare (ideellt)</span><span data-en>Board member and trainer (volunteer)</span></div>
-        <p class="qual-desc"><span data-sv>Hanterar känsliga uppgifter i styrelsearbete och verksamhet, samt planerar och håller utbildningar för skolor och myndigheter.</span><span data-en>Handle sensitive information in board work and operations, and plan and deliver training for schools and authorities.</span></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-left">
-    <div class="footer-name">Nina Bentmosse</div>
-    <div class="footer-sub"><span data-sv>IT-infrastruktur · Säkerhet · Användarstöd</span><span data-en>IT infrastructure · Security · User support</span></div>
-  </div>
-  <div class="footer-links">
-    <a href="https://www.linkedin.com/in/ninabentmosse/" target="_blank" rel="noopener" class="footer-link" aria-label="LinkedIn">in</a>
-    <a href="mailto:nina@ninaspace.dev" class="footer-link" aria-label="Email">✉</a>
-  </div>
-</footer>
-
-<script>
-/* Language */
-function setLang(lang){
-  document.body.className=lang;
-  document.documentElement.lang=lang;
-  document.getElementById('btn-sv').classList.toggle('active',lang==='sv');
-  document.getElementById('btn-en').classList.toggle('active',lang==='en');
-  document.getElementById('btn-sv').setAttribute('aria-pressed', lang==='sv');
-  document.getElementById('btn-en').setAttribute('aria-pressed', lang==='en');
-}
-
-/* Nav scroll */
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40),{passive:true});
-
-/* Reveal on scroll */
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('up');obs.unobserve(e.target);}});
-},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-</script>
-</body>
-</html>
+.feat-title{font-family:var(--display);font-size:1.05rem;font-weight:700;margin-bottom:.6rem;color:var(--
